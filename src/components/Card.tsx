@@ -26,19 +26,23 @@ export default function Card({ type }: CardProps) {
   return (
     <div className='w-full h-full bg-[#0d0f12]'>
       <div
-        className='w-full h-full min-w-[225px] min-h-[300px] flex items-center justify-center rounded-lg bg-white text-black cursor-pointer select-none brightness-90 hover:brightness-100 transition-all'
+        className='w-full h-full min-w-[225px] min-h-[300px] flex flex-col items-center justify-center gap-4 rounded-lg bg-white text-black cursor-pointer select-none brightness-90 hover:brightness-100 transition-all'
         onClick={openModal}
       >
+        The{' '}
         {type
-          .split(' ')
+          .split('-')
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ')}
+        <img src={`/${type}.svg`} alt={`${type} Icon`} className='w-20' />
       </div>
 
       {isOpen && (
         <dialog ref={dialogRef} className='modal' onClose={closeModal}>
           <div className='modal-box bg-[#0d0f121a] shadow-none overflow-hidden px-2 py-4 sm:p-8'>
-            <ScratchableArea cardName={type} />
+            <ScratchableArea title={type} iconSrc={`/${type}.svg`}>
+              you revealed the {type} card!
+            </ScratchableArea>
           </div>
           <form
             method='dialog'

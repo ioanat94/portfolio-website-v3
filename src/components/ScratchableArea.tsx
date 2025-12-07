@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 type ScratchableAreaProps = {
-  cardName: string;
+  title: string;
+  iconSrc: string;
+  children: React.ReactNode;
 };
 
-export default function ScratchableArea({ cardName }: ScratchableAreaProps) {
+export default function ScratchableArea({
+  title,
+  iconSrc,
+  children,
+}: ScratchableAreaProps) {
   const isDesktop =
     typeof window !== 'undefined' ? window.innerWidth > 700 : true;
 
@@ -44,37 +50,55 @@ export default function ScratchableArea({ cardName }: ScratchableAreaProps) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#f3f3f3'; // light overlay
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Draw title
       ctx.font = `bold ${Math.max(
         32,
         Math.round(canvas.height / 13)
       )}px "Jersey 10", system-ui, sans-serif`;
       ctx.fillStyle = '#23272f'; // dark text
       ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      ctx.textBaseline = 'top';
       ctx.letterSpacing = '4px';
       ctx.shadowColor = '#fff';
       ctx.shadowBlur = 8;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 2;
-      ctx.fillText(
-        cardName
-          .split(' ')
+      const titleFormatted =
+        'The ' +
+        title
+          .split('-')
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' '),
-        canvas.width / 2,
-        canvas.height / 2
-      );
+          .join(' ');
+      // Center title and icon vertically and horizontally
+      const titleFontSize = Math.max(32, Math.round(canvas.height / 13));
+      const iconHeight = Math.min(canvas.height * 0.4, 180);
+      const gap = Math.max(32, Math.round(canvas.height / 18)); // Increased gap
+      const totalContentHeight = titleFontSize + gap + iconHeight;
+      const startY = Math.round((canvas.height - totalContentHeight) / 2);
+
+      // Draw title
+      ctx.fillText(titleFormatted, canvas.width / 2, startY);
       ctx.shadowColor = 'transparent';
       ctx.shadowBlur = 0;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
+
+      // Draw SVG below title
+      const img = new window.Image();
+      img.src = iconSrc;
+      img.onload = () => {
+        const imgWidth = iconHeight;
+        const imgX = (canvas.width - imgWidth) / 2;
+        const imgY = startY + titleFontSize + gap;
+        ctx.drawImage(img, imgX, imgY, imgWidth, iconHeight);
+      };
     };
     if (document.fonts) {
       document.fonts.ready.then(drawOverlay);
     } else {
       drawOverlay();
     }
-  }, [cardName, canvasSize]);
+  }, [title, iconSrc, canvasSize]);
 
   const handleScratch = (clientX: number, clientY: number) => {
     if (scratched) return;
@@ -166,7 +190,7 @@ export default function ScratchableArea({ cardName }: ScratchableAreaProps) {
           className='absolute inset-0 flex items-center justify-center z-0 w-full h-full bg-[#23272f] text-white'
           style={{ userSelect: disableDivs || animating ? 'none' : 'auto' }}
         >
-          <span>you won!</span>
+          {children}
         </div>
         {/* Overlay text */}
         <canvas

@@ -7,12 +7,12 @@ import { useState } from 'react';
 function App() {
   const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
   const cardTypes = [
-    'the player',
-    'the inventory',
-    'the attributes',
-    'the quest log',
-    'the side quests',
-    'the credits',
+    'player',
+    'equipment',
+    'attributes',
+    'main-quests',
+    'side-quests',
+    'credits',
   ] as const;
 
   return (
