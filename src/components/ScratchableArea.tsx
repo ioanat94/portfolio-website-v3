@@ -48,14 +48,14 @@ export default function ScratchableArea({
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#f3f3f3'; // light overlay
+      ctx.fillStyle = '#f3f3f3';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      // Draw title
+
       ctx.font = `bold ${Math.max(
         32,
         Math.round(canvas.height / 13)
       )}px "Jersey 10", system-ui, sans-serif`;
-      ctx.fillStyle = '#23272f'; // dark text
+      ctx.fillStyle = '#23272f';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.letterSpacing = '4px';
@@ -69,10 +69,11 @@ export default function ScratchableArea({
           .split('-')
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ');
+
       // Center title and icon vertically and horizontally
       const titleFontSize = Math.max(32, Math.round(canvas.height / 13));
       const iconHeight = Math.min(canvas.height * 0.4, 180);
-      const gap = Math.max(32, Math.round(canvas.height / 18)); // Increased gap
+      const gap = Math.max(32, Math.round(canvas.height / 18));
       const totalContentHeight = titleFontSize + gap + iconHeight;
       const startY = Math.round((canvas.height - totalContentHeight) / 2);
 

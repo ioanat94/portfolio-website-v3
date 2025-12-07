@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 
 import type { CardType } from '../utils/types';
 import ScratchableArea from './ScratchableArea';
+import { match } from 'ts-pattern';
 
 type CardProps = {
   type: CardType;
@@ -41,7 +42,16 @@ export default function Card({ type }: CardProps) {
         <dialog ref={dialogRef} className='modal' onClose={closeModal}>
           <div className='modal-box bg-[#0d0f121a] shadow-none overflow-hidden px-2 py-4 sm:p-8'>
             <ScratchableArea title={type} iconSrc={`/${type}.svg`}>
-              you revealed the {type} card!
+              <Suspense fallback={<div>Loading...</div>}>
+                {match(type)
+                  .with('player', () => <PlayerCardContent />)
+                  .with('equipment', () => <EquipmentCardContent />)
+                  .with('attributes', () => <AttributesCardContent />)
+                  .with('main-quests', () => <MainQuestsCardContent />)
+                  .with('side-quests', () => <SideQuestsCardContent />)
+                  .with('credits', () => <CreditsCardContent />)
+                  .exhaustive()}
+              </Suspense>
             </ScratchableArea>
           </div>
           <form
@@ -56,3 +66,34 @@ export default function Card({ type }: CardProps) {
     </div>
   );
 }
+
+const PlayerCardContent = React.lazy(() =>
+  import('./PlayerCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
+const EquipmentCardContent = React.lazy(() =>
+  import('./EquipmentCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
+const AttributesCardContent = React.lazy(() =>
+  import('./AttributesCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
+const MainQuestsCardContent = React.lazy(() =>
+  import('./MainQuestsCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
+const SideQuestsCardContent = React.lazy(() =>
+  import('./SideQuestsCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
+const CreditsCardContent = React.lazy(() =>
+  import('./CreditsCardContent').then((module) => ({
+    default: module.default,
+  }))
+);
