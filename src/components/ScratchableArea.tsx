@@ -1,15 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+import type { CardType } from '../utils/types';
+
 type ScratchableAreaProps = {
   title: string;
   iconSrc: string;
   children: React.ReactNode;
+  setRevealedCards?: React.Dispatch<React.SetStateAction<CardType[]>>;
+  revealedCards?: CardType[];
 };
 
 export default function ScratchableArea({
   title,
   iconSrc,
   children,
+  setRevealedCards,
+  revealedCards,
 }: ScratchableAreaProps) {
   const isDesktop =
     typeof window !== 'undefined' ? window.innerWidth > 700 : true;
@@ -162,6 +168,13 @@ export default function ScratchableArea({
       setTimeout(() => {
         setAnimating(false);
       }, 2000);
+      if (
+        setRevealedCards &&
+        revealedCards &&
+        !revealedCards.includes(title as CardType)
+      ) {
+        setRevealedCards([...revealedCards, title as CardType]);
+      }
     }
   };
 

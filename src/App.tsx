@@ -17,20 +17,15 @@ function App() {
 
   return (
     <div className='flex flex-col gap-6 '>
-      <h2>Pick a card to scratch!</h2>
+      <h2 className='hidden-until-font-loaded'>Pick a card to scratch!</h2>
       <div className='grid grid-cols-3 gap-6'>
         {cardTypes.map((type) => (
-          <div
+          <Card
             key={type}
-            className='rounded cursor-pointer h-[300px] flex items-center justify-center hover:scale-105 transition-transform bg-[#23272f]'
-            onClick={() => {
-              if (!revealedCards.includes(type)) {
-                setRevealedCards([...revealedCards, type]);
-              }
-            }}
-          >
-            <Card type={type} />
-          </div>
+            type={type}
+            revealedCards={revealedCards}
+            setRevealedCards={setRevealedCards}
+          />
         ))}
       </div>
     </div>
