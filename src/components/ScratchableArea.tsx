@@ -6,8 +6,8 @@ type ScratchableAreaProps = {
   title: string;
   iconSrc: string;
   children: React.ReactNode;
-  setRevealedCards?: React.Dispatch<React.SetStateAction<CardType[]>>;
-  revealedCards?: CardType[];
+  setRevealedCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+  revealedCards: CardType[];
 };
 
 export default function ScratchableArea({
@@ -168,11 +168,7 @@ export default function ScratchableArea({
       setTimeout(() => {
         setAnimating(false);
       }, 2000);
-      if (
-        setRevealedCards &&
-        revealedCards &&
-        !revealedCards.includes(title as CardType)
-      ) {
+      if (!revealedCards.includes(title as CardType)) {
         setRevealedCards([...revealedCards, title as CardType]);
       }
     }
@@ -215,6 +211,8 @@ export default function ScratchableArea({
     handleScratch(e.clientX, e.clientY);
   };
 
+  const isRevealed = revealedCards.includes(title as CardType);
+
   return (
     <div
       ref={containerRef}
@@ -232,13 +230,15 @@ export default function ScratchableArea({
           {children}
         </div>
         {/* Overlay text */}
-        <canvas
-          ref={canvasRef}
-          width={canvasSize.width}
-          height={canvasSize.height}
-          className='absolute inset-0 z-10 touch-none cursor-pointer rounded-2xl bg-transparent block w-full h-full'
-          onPointerMove={handlePointerMove}
-        />
+        {!isRevealed && (
+          <canvas
+            ref={canvasRef}
+            width={canvasSize.width}
+            height={canvasSize.height}
+            className='absolute inset-0 z-10 touch-none cursor-pointer rounded-2xl bg-transparent block w-full h-full'
+            onPointerMove={handlePointerMove}
+          />
+        )}
       </figure>
       {[...Array(8)].map((_, i) => {
         return (
