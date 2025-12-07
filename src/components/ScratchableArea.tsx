@@ -48,21 +48,46 @@ export default function ScratchableArea({
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#f3f3f3';
+      ctx.fillStyle = '#23272F'; // dark overlay like small cards
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Draw visible border on overlay
+      const borderRadius = 32;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(borderRadius, 0);
+      ctx.lineTo(canvas.width - borderRadius, 0);
+      ctx.quadraticCurveTo(canvas.width, 0, canvas.width, borderRadius);
+      ctx.lineTo(canvas.width, canvas.height - borderRadius);
+      ctx.quadraticCurveTo(
+        canvas.width,
+        canvas.height,
+        canvas.width - borderRadius,
+        canvas.height
+      );
+      ctx.lineTo(borderRadius, canvas.height);
+      ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - borderRadius);
+      ctx.lineTo(0, borderRadius);
+      ctx.quadraticCurveTo(0, 0, borderRadius, 0);
+      ctx.closePath();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#7C3AED';
+      ctx.shadowColor = 'rgba(124,58,237,0.25)';
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.restore();
 
       ctx.font = `bold ${Math.max(
         32,
         Math.round(canvas.height / 13)
       )}px "Jersey 10", system-ui, sans-serif`;
-      ctx.fillStyle = '#23272f';
+      ctx.fillStyle = '#fff'; // white text for overlay
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.letterSpacing = '4px';
-      ctx.shadowColor = '#fff';
-      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
       ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 2;
+      ctx.shadowOffsetY = 0;
       const titleFormatted =
         'The ' +
         title
@@ -188,7 +213,7 @@ export default function ScratchableArea({
       <figure className='rounded-2xl p-0 w-full h-full m-0 relative overflow-hidden'>
         {/* Underlying content */}
         <div
-          className='absolute inset-0 flex items-center justify-center z-0 w-full h-full bg-[#23272f] text-white'
+          className='absolute inset-0 flex flex-col items-center justify-center z-0 w-full h-full bg-[#F3F4F6] text-[#23272F] px-4 rounded-2xl border-2 border-[#7C3AED] shadow-[0_0_0_4px_rgba(124,58,237,0.25)]'
           style={{ userSelect: disableDivs || animating ? 'none' : 'auto' }}
         >
           {children}

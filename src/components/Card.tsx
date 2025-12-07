@@ -25,17 +25,24 @@ export default function Card({ type }: CardProps) {
   };
 
   return (
-    <div className='w-full h-full bg-[#0d0f12]'>
+    <div className='w-full h-full bg-[#181A20]'>
+      {/* Small card */}
       <div
-        className='w-full h-full min-w-[225px] min-h-[300px] flex flex-col items-center justify-center gap-4 rounded-lg bg-white text-black cursor-pointer select-none brightness-90 hover:brightness-100 transition-all'
+        className='w-full h-full min-w-[225px] min-h-[300px] flex flex-col items-center justify-center gap-4 rounded-lg bg-[#23272F] text-[#E5E7EB] cursor-pointer select-none shadow-lg border border-[#7C3AED] hover:shadow-purple-700/40 hover:border-purple-500 transition-all duration-200'
         onClick={openModal}
       >
-        The{' '}
-        {type
-          .split('-')
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ')}
-        <img src={`/${type}.svg`} alt={`${type} Icon`} className='w-20' />
+        <span className='font-bold tracking-wide text-lg'>
+          The{' '}
+          {type
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')}
+        </span>
+        <img
+          src={`/${type}.svg`}
+          alt={`${type} Icon`}
+          className='w-20 drop-shadow-lg'
+        />
       </div>
 
       {isOpen && (
