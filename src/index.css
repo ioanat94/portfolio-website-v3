@@ -2,7 +2,7 @@
 @plugin "daisyui";
 
 :root {
-  font-family: 'Jersey 10', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Quantico', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,9 +14,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  font-size: 24px;
-  letter-spacing: 1.5px;
 }
 
 a {
@@ -34,8 +31,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
-  font-size: 1rem;
+  font-size: 18px;
 }
 
 body:not(.font-loaded) .hidden-until-font-loaded {

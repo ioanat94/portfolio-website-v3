@@ -40,49 +40,49 @@ export default function Card({
         }`}
         onClick={openModal}
       >
-        {isRevealed ? (
+        {/* {isRevealed ? (
           <Suspense fallback={<div>Loading...</div>}>
             {match(type)
-              .with('player', () => <PlayerCardContent isMini />)
-              .with('equipment', () => <EquipmentCardContent isMini />)
-              .with('attributes', () => <AttributesCardContent isMini />)
-              .with('main-quests', () => <MainQuestsCardContent isMini />)
-              .with('side-quests', () => <SideQuestsCardContent isMini />)
-              .with('credits', () => <CreditsCardContent isMini />)
+              .with('player', () => <PlayerCardContent />)
+              .with('equipment', () => <EquipmentCardContent />)
+              .with('attributes', () => <AttributesCardContent />)
+              .with('main-quests', () => <MainQuestsCardContent />)
+              .with('side-quests', () => <SideQuestsCardContent />)
+              .with('credits', () => <CreditsCardContent />)
               .exhaustive()}
           </Suspense>
-        ) : (
-          <>
-            <span className='hidden-until-font-loaded font-bold tracking-wide text-lg'>
-              The{' '}
-              {type
-                .split('-')
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ')}
-            </span>
-            <div
-              style={{
-                height: '5rem',
-                width: '5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src={`/${type}.svg`}
-                alt={`${type} Icon`}
-                className='w-20 drop-shadow-lg'
-                style={{ minHeight: '5rem', minWidth: '5rem' }}
-              />
-            </div>
-          </>
-        )}
+        ) : ( */}
+        <>
+          <span className='hidden-until-font-loaded font-bold tracking-wide text-lg'>
+            The{' '}
+            {type
+              .split('-')
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ')}
+          </span>
+          <div
+            style={{
+              height: '5rem',
+              width: '5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src={`/${type}.svg`}
+              alt={`${type} Icon`}
+              className='w-20 drop-shadow-lg'
+              style={{ minHeight: '5rem', minWidth: '5rem' }}
+            />
+          </div>
+        </>
+        {/* )} */}
       </div>
 
       {isOpen && (
         <dialog ref={dialogRef} className='modal' onClose={closeModal}>
-          <div className='modal-box bg-[#0d0f121a] shadow-none overflow-hidden px-2 py-4 sm:p-8'>
+          <div className='modal-box bg-transparent shadow-none overflow-hidden px-2 py-4 sm:p-8'>
             <ScratchableArea
               title={type}
               iconSrc={`/${type}.svg`}

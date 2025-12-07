@@ -22,6 +22,7 @@ export default function ScratchableArea({
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  // Set default to match max-w/max-h for robust initial sizing
   const [canvasSize, setCanvasSize] = useState({ width: 600, height: 800 });
 
   // Calculate dynamic scratch radius based on card size
@@ -85,7 +86,7 @@ export default function ScratchableArea({
       ctx.font = `bold ${Math.max(
         32,
         Math.round(canvas.height / 13)
-      )}px "Jersey 10", system-ui, sans-serif`;
+      )}px "Quantico", system-ui, sans-serif`;
       ctx.fillStyle = '#fff'; // white text for overlay
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
@@ -216,7 +217,7 @@ export default function ScratchableArea({
   return (
     <div
       ref={containerRef}
-      className={`relative w-[85vw] h-[150vw] max-w-[600px] max-h-[800px] ${
+      className={`relative w-full max-w-[600px] aspect-3/4 ${
         !disableDivs && !animating ? '' : 'pointer-events-none'
       } ${animating ? 'scratch-revealed' : ''} ${isDesktop ? 'hover-3d' : ''}`}
       onPointerDown={handlePointerDown}
@@ -224,8 +225,13 @@ export default function ScratchableArea({
       <figure className='rounded-2xl p-0 w-full h-full m-0 relative overflow-hidden'>
         {/* Underlying content */}
         <div
-          className='absolute inset-0 flex flex-col items-center justify-center z-0 w-full h-full bg-[#F3F4F6] text-[#23272F] px-4 rounded-2xl border-2 border-[#7C3AED] shadow-[0_0_0_4px_rgba(124,58,237,0.25)]'
-          style={{ userSelect: disableDivs || animating ? 'none' : 'auto' }}
+          className='absolute inset-0 flex flex-col items-center justify-center z-0 w-full h-full text-[#23272F] px-4 rounded-2xl border-2 border-[#382455] shadow-[0_0_0_4px_rgba(124,58,237,0.25)]'
+          style={{
+            userSelect: disableDivs || animating ? 'none' : 'auto',
+            boxShadow: 'inset 0 0 0 15px #382455',
+            background:
+              'linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 60%, #fdf6fb 100%)',
+          }}
         >
           {children}
         </div>
