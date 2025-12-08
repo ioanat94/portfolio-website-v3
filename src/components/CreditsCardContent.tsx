@@ -1,6 +1,6 @@
 export default function CreditsCardContent() {
   return (
-    <div className='flex flex-col gap-4 w-full h-full py-6 px-4'>
+    <div className='flex flex-col gap-4 w-full h-full pt-8 px-4'>
       <span className='font-bold text-4xl text-center'>The Credits</span>
       <span className='text-justify'>
         Looking for the missing member of your party? Are you in need of a
@@ -12,7 +12,7 @@ export default function CreditsCardContent() {
           href='https://www.linkedin.com/in/ioana-tiplea/'
           target='_blank'
           rel='noopener noreferrer'
-          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%] z-50'
+          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%]'
         >
           <img
             src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg'
@@ -27,7 +27,7 @@ export default function CreditsCardContent() {
           href='https://github.com/ioanat94'
           target='_blank'
           rel='noopener noreferrer'
-          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%] z-50'
+          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%]'
         >
           <img
             src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg'
@@ -42,7 +42,7 @@ export default function CreditsCardContent() {
           href='mailto:ioanatiplea94@gmail.com'
           target='_blank'
           rel='noopener noreferrer'
-          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%] z-50'
+          className='flex items-center gap-4 text-black border border-[#7C3AED] rounded-md p-2 hover:bg-white w-[90%]'
         >
           <img
             src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg'

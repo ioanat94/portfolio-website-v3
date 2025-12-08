@@ -1,6 +1,6 @@
 export default function PlayerCardContent() {
   return (
-    <div className='flex flex-col gap-4 w-full h-full py-6 px-4'>
+    <div className='flex flex-col gap-4 w-full h-full pt-8 px-4'>
       <span className='font-bold text-4xl text-center'>The Player</span>
       <div className='flex flex-col gap-3'>
         <img

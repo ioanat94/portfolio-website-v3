@@ -1,6 +1,6 @@
 export default function EquipmentCardContent() {
   return (
-    <div className='flex flex-col gap-4 w-full h-full py-6 px-4'>
+    <div className='flex flex-col gap-4 w-full h-full pt-8 px-4'>
       <span className='font-bold text-4xl text-center'>The Equipment</span>
       <span className='text-justify'>
         A Full Stack Sorcerer's inventory is vast and ever-expanding, which is

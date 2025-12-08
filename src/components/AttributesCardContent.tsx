@@ -1,6 +1,6 @@
 export default function AttributesCardContent() {
   return (
-    <div className='flex flex-col gap-6 w-full h-full py-6 px-4'>
+    <div className='flex flex-col gap-6 w-full h-full pt-8 px-4'>
       <span className='font-bold text-4xl text-center'>The Attributes</span>
       <div className='flex flex-col gap-4'>
         <div className='flex flex-col gap-3'>
