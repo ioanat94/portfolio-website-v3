@@ -84,8 +84,8 @@ export default function ScratchableArea({
       ctx.restore();
 
       ctx.font = `bold ${Math.max(
-        32,
-        Math.round(canvas.height / 13)
+        28,
+        Math.round(canvas.height / 15.5)
       )}px "Quantico", system-ui, sans-serif`;
       ctx.fillStyle = '#fff'; // white text for overlay
       ctx.textAlign = 'center';
@@ -103,7 +103,7 @@ export default function ScratchableArea({
           .join(' ');
 
       // Center title and icon vertically and horizontally
-      const titleFontSize = Math.max(32, Math.round(canvas.height / 13));
+      const titleFontSize = Math.max(28, Math.round(canvas.height / 15.5));
       const iconHeight = Math.min(canvas.height * 0.4, 180);
       const gap = Math.max(32, Math.round(canvas.height / 18));
       const totalContentHeight = titleFontSize + gap + iconHeight;

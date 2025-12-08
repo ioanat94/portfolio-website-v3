@@ -4,10 +4,10 @@ export default function EquipmentCardContent() {
       <span className='font-bold text-4xl text-center'>The Equipment</span>
       <span className='text-justify'>
         A Full Stack Sorcerer's inventory is vast and ever-expanding, which is
-        why one should use the items best suited for the task at hand. Here is a
-        selection of my most commonly equipped:
+        why one should always use the tools best suited for the task at hand.
+        Below is a selection of my most commonly equipped tools.
       </span>
-      <div className='grid grid-cols-2 gap-y-4'>
+      <div className='grid grid-cols-2 gap-y-4 pt-1'>
         <div className='flex flex-col items-center gap-1'>
           <img
             src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg'
