@@ -16,10 +16,10 @@ export default function App() {
   ] as const;
 
   return (
-    <div className='flex flex-col gap-6'>
-      <h2 className='hidden-until-font-loaded text-center'>
+    <div className='flex flex-col gap-12'>
+      <h1 className='hidden-until-font-loaded text-center'>
         Pick a card to scratch!
-      </h2>
+      </h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12'>
         {cardTypes.map((type) => (
           <Card
