@@ -246,7 +246,7 @@ export default function ScratchableArea({
           />
         )}
       </figure>
-      {[...Array(8)].map((_, i) => {
+      {[...Array(title === 'credits' && isRevealed ? 3 : 8)].map((_, i) => {
         return (
           <div
             key={i}
