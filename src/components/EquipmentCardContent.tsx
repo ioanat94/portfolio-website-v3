@@ -1,18 +1,56 @@
-type EquipmentCardContentProps = {
-  isMini?: boolean;
-};
-
-export default function EquipmentCardContent({
-  isMini,
-}: EquipmentCardContentProps) {
+export default function EquipmentCardContent() {
   return (
-    <div
-      className={isMini ? 'scale-75 origin-top w-full h-full' : ''}
-      style={
-        isMini ? { maxWidth: 200, maxHeight: 120, overflow: 'hidden' } : {}
-      }
-    >
-      You have revealed the equipment card content!
+    <div className='flex flex-col gap-4 w-full h-full py-6 px-4'>
+      <span className='font-bold text-4xl text-center'>The Equipment</span>
+      <span className='text-justify'>
+        A Full Stack Sorcerer's inventory is vast and ever-expanding, which is
+        why one should use the items best suited for the task at hand. Here is a
+        selection of my most commonly equipped:
+      </span>
+      <div className='grid grid-cols-2 gap-y-4'>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg'
+            className='w-16'
+          />
+          <p>Typescript</p>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg'
+            className='w-16'
+          />
+          <div>React</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg'
+            className='w-16'
+          />
+          <div>Node.js</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg'
+            className='w-16'
+          />
+          <div>PostgreSQL</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg'
+            className='w-16'
+          />
+          <div>Vitest</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+          <img
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg'
+            className='w-16'
+          />
+          <div>Google Cloud</div>
+        </div>
+      </div>
     </div>
   );
 }

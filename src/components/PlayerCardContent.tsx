@@ -1,12 +1,12 @@
 export default function PlayerCardContent() {
   return (
-    <div className={`flex flex-col gap-2 w-full h-full py-6 px-4`}>
+    <div className='flex flex-col gap-4 w-full h-full py-6 px-4'>
       <span className='font-bold text-4xl text-center'>The Player</span>
       <div className='flex flex-col gap-3'>
         <img
           src='/me.png'
           alt='Player Avatar'
-          className='w-52 h-min rounded-2xl self-center'
+          className='w-48 h-min rounded-2xl self-center'
         />
         <div className='flex flex-col items-start justify-start gap-2'>
           <p>
