@@ -4,7 +4,7 @@ import Card from './components/Card';
 import type { CardType } from './utils/types';
 import { useState } from 'react';
 
-function App() {
+export default function App() {
   const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
   const cardTypes = [
     'player',
@@ -16,11 +16,11 @@ function App() {
   ] as const;
 
   return (
-    <div className='flex flex-col gap-6 '>
+    <div className='flex flex-col gap-6'>
       <h2 className='hidden-until-font-loaded text-center'>
         Pick a card to scratch!
       </h2>
-      <div className='grid grid-cols-3 gap-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12'>
         {cardTypes.map((type) => (
           <Card
             key={type}
@@ -33,5 +33,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

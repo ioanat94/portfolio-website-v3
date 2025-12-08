@@ -17,6 +17,7 @@ export default function Card({
 }: CardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const isRevealed = revealedCards.includes(type);
 
   const openModal = () => {
     setIsOpen(true);
@@ -30,12 +31,11 @@ export default function Card({
     dialogRef.current?.close();
   };
 
-  const isRevealed = revealedCards.includes(type);
   return (
-    <div className='w-full h-full '>
+    <div className='flex justify-center'>
       {/* Small card */}
       <div
-        className={`w-full h-full min-w-[225px] min-h-[300px] flex flex-col items-center justify-center gap-4 rounded-lg border border-[#7C3AED] shadow-lg transition-all duration-200 cursor-pointer select-none  hover:shadow-purple-700/40 hover:border-purple-500 ${
+        className={`aspect-3/4 w-[225px] flex flex-col items-center justify-center gap-4 rounded-lg border border-[#7C3AED] shadow-lg transition-all duration-200 cursor-pointer select-none  hover:shadow-purple-700/40 hover:border-purple-500 ${
           isRevealed ? 'bg-white text-black' : 'bg-[#23272F] text-[#E5E7EB]'
         }`}
         onClick={openModal}
@@ -60,20 +60,11 @@ export default function Card({
               .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
               .join(' ')}
           </span>
-          <div
-            style={{
-              height: '5rem',
-              width: '5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+          <div className='h-20 w-20 flex items-center justify-center'>
             <img
               src={`/${type}.svg`}
               alt={`${type} Icon`}
               className='w-20 drop-shadow-lg'
-              style={{ minHeight: '5rem', minWidth: '5rem' }}
             />
           </div>
         </>

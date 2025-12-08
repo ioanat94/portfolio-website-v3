@@ -9,7 +9,7 @@ export default function SideQuestsCardContent() {
             <div>
               <p className='font-bold'>The Chronicler of Worlds</p>
               <p>
-                Engaged in simulation and lore exploration across vast digital
+                Engaging in simulation and lore exploration across vast digital
                 realms to hone critical thinking and rapid decision-making.
               </p>
             </div>

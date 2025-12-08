@@ -19,11 +19,17 @@ export default function ScratchableArea({
 }: ScratchableAreaProps) {
   const isDesktop =
     typeof window !== 'undefined' ? window.innerWidth > 700 : true;
+  const isRevealed = revealedCards.includes(title as CardType);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDrawing = useRef(false);
+
   // Set default to match max-w/max-h for robust initial sizing
   const [canvasSize, setCanvasSize] = useState({ width: 600, height: 800 });
+  const [disableDivs, setDisableDivs] = useState(false);
+  const [scratched, setScratched] = useState(false);
+  const [animating, setAnimating] = useState(false);
 
   // Calculate dynamic scratch radius based on card size
   const SCRATCH_RADIUS = Math.max(24, Math.round(canvasSize.width / 18));
@@ -43,10 +49,6 @@ export default function ScratchableArea({
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-  const isDrawing = useRef(false);
-  const [disableDivs, setDisableDivs] = useState(false);
-  const [scratched, setScratched] = useState(false);
-  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     const drawOverlay = () => {
@@ -58,7 +60,7 @@ export default function ScratchableArea({
       ctx.fillStyle = '#23272F'; // dark overlay like small cards
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       // Draw visible border on overlay
-      const borderRadius = 32;
+      const borderRadius = 16;
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(borderRadius, 0);
@@ -133,6 +135,29 @@ export default function ScratchableArea({
     }
   }, [title, iconSrc, canvasSize]);
 
+  useEffect(() => {
+    if (!isDrawing.current) return;
+
+    const moveListener = (e: PointerEvent) => {
+      handleScratch(e.clientX, e.clientY);
+    };
+    const upListener = () => {
+      isDrawing.current = false;
+      setDisableDivs(false);
+      window.removeEventListener('pointermove', moveListener);
+      window.removeEventListener('pointerup', upListener);
+    };
+
+    window.addEventListener('pointermove', moveListener);
+    window.addEventListener('pointerup', upListener);
+
+    return () => {
+      window.removeEventListener('pointermove', moveListener);
+      window.removeEventListener('pointerup', upListener);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disableDivs]);
+
   const handleScratch = (clientX: number, clientY: number) => {
     if (scratched) return;
 
@@ -175,29 +200,6 @@ export default function ScratchableArea({
     }
   };
 
-  useEffect(() => {
-    if (!isDrawing.current) return;
-
-    const moveListener = (e: PointerEvent) => {
-      handleScratch(e.clientX, e.clientY);
-    };
-    const upListener = () => {
-      isDrawing.current = false;
-      setDisableDivs(false);
-      window.removeEventListener('pointermove', moveListener);
-      window.removeEventListener('pointerup', upListener);
-    };
-
-    window.addEventListener('pointermove', moveListener);
-    window.addEventListener('pointerup', upListener);
-
-    return () => {
-      window.removeEventListener('pointermove', moveListener);
-      window.removeEventListener('pointerup', upListener);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disableDivs]);
-
   const handlePointerDown = (e: React.PointerEvent) => {
     if (scratched) return;
 
@@ -211,8 +213,6 @@ export default function ScratchableArea({
 
     handleScratch(e.clientX, e.clientY);
   };
-
-  const isRevealed = revealedCards.includes(title as CardType);
 
   return (
     <div
