@@ -95,7 +95,7 @@ button:focus-visible {
   }
 }
 
-@keyframes scratch-reveal {
+@keyframes scratch-reveal-desktop {
   0% {
     transform: scale(1);
   }
@@ -107,6 +107,24 @@ button:focus-visible {
   }
 }
 
+@keyframes scratch-reveal-mobile {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .scratch-revealed {
-  animation: scratch-reveal 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: scratch-reveal-desktop 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (max-width: 700px) {
+  .scratch-revealed {
+    animation: scratch-reveal-mobile 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
 }
