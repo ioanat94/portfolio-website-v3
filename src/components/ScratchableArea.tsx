@@ -24,6 +24,7 @@ export default function ScratchableArea({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDrawing = useRef(false);
+  const lastDrawId = useRef(0);
 
   // Set default to match max-w/max-h for robust initial sizing
   const [canvasSize, setCanvasSize] = useState({ width: 600, height: 800 });
@@ -52,6 +53,7 @@ export default function ScratchableArea({
 
   useEffect(() => {
     const drawOverlay = () => {
+      const drawId = ++lastDrawId.current;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -118,15 +120,16 @@ export default function ScratchableArea({
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
 
-      // Draw SVG below title
+      // Draw SVG below title, only if this is the latest draw
       const img = new window.Image();
-      img.src = iconSrc;
       img.onload = () => {
+        if (drawId !== lastDrawId.current) return; // ignore late draws
         const imgWidth = iconHeight;
         const imgX = (canvas.width - imgWidth) / 2;
         const imgY = startY + titleFontSize + gap;
         ctx.drawImage(img, imgX, imgY, imgWidth, iconHeight);
       };
+      img.src = iconSrc;
     };
     if (document.fonts) {
       document.fonts.ready.then(drawOverlay);

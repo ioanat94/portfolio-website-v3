@@ -101,32 +101,32 @@ export default function Card({
 }
 
 const PlayerCardContent = React.lazy(() =>
-  import('./PlayerCardContent').then((module) => ({
+  import('./player/PlayerCardContent').then((module) => ({
     default: module.default,
   }))
 );
 const EquipmentCardContent = React.lazy(() =>
-  import('./EquipmentCardContent').then((module) => ({
+  import('./equipment/EquipmentCardContent').then((module) => ({
     default: module.default,
   }))
 );
 const AttributesCardContent = React.lazy(() =>
-  import('./AttributesCardContent').then((module) => ({
+  import('./attributes/AttributesCardContent').then((module) => ({
     default: module.default,
   }))
 );
 const MainQuestsCardContent = React.lazy(() =>
-  import('./MainQuestsCardContent').then((module) => ({
+  import('./mainQuests/MainQuestsCardContent').then((module) => ({
     default: module.default,
   }))
 );
 const SideQuestsCardContent = React.lazy(() =>
-  import('./SideQuestsCardContent').then((module) => ({
+  import('./sideQuests/SideQuestsCardContent').then((module) => ({
     default: module.default,
   }))
 );
 const CreditsCardContent = React.lazy(() =>
-  import('./CreditsCardContent').then((module) => ({
+  import('./credits/CreditsCardContent').then((module) => ({
     default: module.default,
   }))
 );
