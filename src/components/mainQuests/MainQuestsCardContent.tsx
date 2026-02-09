@@ -9,7 +9,7 @@ export default function MainQuestsCardContent() {
           imageSrc='/active-quest.png'
           title='Software Developer'
           company='Zimple'
-          period='2023 - Present'
+          period='2023 - 2026'
           description={
             <>
               Wielded <strong>Front End</strong> spells to elevate{' '}
