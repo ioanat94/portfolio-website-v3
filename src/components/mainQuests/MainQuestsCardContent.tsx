@@ -22,7 +22,7 @@ export default function MainQuestsCardContent() {
           }
         />
         <MainQuest
-          imageSrc='/completed-quest.png'
+          imageSrc='/active-quest.png'
           title='Full Stack Developer Trainee'
           company='Integrify'
           period='2022 - 2023'

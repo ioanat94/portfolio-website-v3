@@ -73,7 +73,7 @@ export default function ScratchableArea({
         canvas.width,
         canvas.height,
         canvas.width - borderRadius,
-        canvas.height
+        canvas.height,
       );
       ctx.lineTo(borderRadius, canvas.height);
       ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - borderRadius);
@@ -89,7 +89,7 @@ export default function ScratchableArea({
 
       ctx.font = `bold ${Math.max(
         28,
-        Math.round(canvas.height / 15.5)
+        Math.round(canvas.height / 15.5),
       )}px "Quantico", system-ui, sans-serif`;
       ctx.fillStyle = '#fff'; // white text for overlay
       ctx.textAlign = 'center';
@@ -180,7 +180,7 @@ export default function ScratchableArea({
     ctx.fill();
     ctx.globalCompositeOperation = 'source-over';
 
-    // 80% scratch detection logic
+    // 70% scratch detection logic
     // Only check every few scratches for performance
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const total = imageData.data.length / 4;
@@ -189,7 +189,7 @@ export default function ScratchableArea({
       if (imageData.data[i + 3] === 0) transparent++;
     }
     const percent = transparent / total;
-    if (percent >= 0.8) {
+    if (percent >= 0.7) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       setScratched(true);
       setAnimating(true);
